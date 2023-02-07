@@ -1,0 +1,13 @@
+Name		Model		FF		Year		Screen		Price
+
+Samsung		A01		SFF		1990		2.0		50.00
+Samsung		A51		SFF		2020		6.0		2000.00
+Samsung		S2		SFF		2018		6.0		3000.00
+Samsung		A03		SFF		1990		2.0		50.00
+Huwawie		2		FFS		1800		5.0		2000.00
+Huwawie		65M		FFS		1800		4.0		2000.00
+Samsung		S6		SFF		2018		12.0		8000.00
+Samsung		S9		FFT		1989		20		2000
+RedMi		Note		SST		2005		6		1900
+Xiaomi		Note		FFT		2015		6.5		2000
+Xiaomi		Note		FFT		2015		6.5		2000

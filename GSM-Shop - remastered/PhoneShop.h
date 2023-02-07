@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include "Phone.h";
+#include <fstream>
 
 class PhoneShop {
 private:
@@ -20,9 +21,9 @@ public:
         string phoneName;
         string modelName;
         string formFactor;
-        int yearOfIssue;
+        string yearOfIssue;
         string screenSizeInches;
-        float price;
+        string price;
         getline(cin, phoneName);
         cout << "Type the name of the phone" << endl;
         getline(cin, phoneName);
@@ -56,6 +57,18 @@ public:
         cout << "Which Phone do you want do delete? (choose number)\n";
         ShowPhones("", "");
         cin >> number;
+        auto it = phones.begin();
+        while (it->GetID() != number) {
+            it++;
+        }
+
+        RemoveFromBrands(it->GetPhoneName());
+        phones.erase(it);
+
+    }
+
+    void DeletePhone(int number)
+    {
         auto it = phones.begin();
         while (it->GetID() != number) {
             it++;
@@ -123,7 +136,7 @@ public:
 
     void ShowPhones(string type, string specific)
     {
-        cout << "ID\t" << "Name\t" << "Model\t" << "FF\t" << "Year\t" << "Screen\t" << "Price\n";
+        cout << "ID\t\t" << "Name\t\t" << "Model\t\t" << "FF\t\t" << "Year\t\t" << "Screen\t\t" << "Price\n";
         list <Phone> tempphones;
 
         int caseHolder = 3;
@@ -167,12 +180,12 @@ public:
         }
 
         for (auto v : tempphones) {
-            cout << v.GetID() << "\t";
-            cout << v.GetPhoneName() << "\t";
-            cout << v.GetPhoneModel() << "\t";
-            cout << v.GetFormFactor() << "\t";
-            cout << v.GetYearOfIssue() << "\t";
-            cout << v.GetScreenSizeInches() << "\t";
+            cout << v.GetID() << "\t\t";
+            cout << v.GetPhoneName() << "\t\t";
+            cout << v.GetPhoneModel() << "\t\t";
+            cout << v.GetFormFactor() << "\t\t";
+            cout << v.GetYearOfIssue() << "\t\t";
+            cout << v.GetScreenSizeInches() << "\t\t";
             cout << v.GetPrice() << "\n";
         }
     }
@@ -239,5 +252,59 @@ public:
         auto iterBrands = Brands.find(phonename);
         if (iterBrands != Brands.end())
             iterBrands->second -= 1;
+    }
+
+    void ReadFromFile(string file)
+    {
+        string mystring;
+        string phoneArray[6];
+        int i = 0;
+        int phoneToDelete = -1 + phones.size();
+        ifstream data(file);
+        if (data.is_open())
+        {
+            while (data)
+            {
+                size_t pos = 0;
+                string token;
+                string delimiter = "\t";
+                i = 0;
+                getline(data, mystring);
+                while ((pos = mystring.find(delimiter)) != string::npos)
+                {
+                    token = mystring.substr(0, pos);
+                    mystring.erase(0, pos + delimiter.length());
+                    //cout << token << endl;
+                    phoneArray[i] = token;
+                    i++;
+                }
+                phoneArray[5] = mystring;
+                AddPhone(Phone(phoneArray[0], phoneArray[1], phoneArray[2], phoneArray[3], phoneArray[4], phoneArray[5]));
+                phoneToDelete++;
+            }
+            if(phoneToDelete != -1)
+                DeletePhone(phoneToDelete);
+            data.close();
+        }
+    }
+
+    void WriteToFile(string file)
+    {
+        ofstream writeFile(file);
+
+        writeFile << "Name\t\t" << "Model\t\t" << "FF\t\t" << "Year\t\t" << "Screen\t\t" << "Price\n";
+        writeFile << "\n";
+
+        for (auto p : phones)
+        {
+            writeFile << p.GetPhoneName() << "\t\t";
+            writeFile << p.GetPhoneModel() << "\t\t";
+            writeFile << p.GetFormFactor() << "\t\t";
+            writeFile << p.GetYearOfIssue() << "\t\t";
+            writeFile << p.GetScreenSizeInches() << "\t\t";
+            writeFile << p.GetPrice() << "\n";
+        }
+
+        writeFile.close();
     }
 };

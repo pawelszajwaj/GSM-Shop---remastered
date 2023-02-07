@@ -24,14 +24,14 @@ public:
         phoneName = "unknown";
         modelName = "unknown";
         formFactor = "unknown";
-        yearOfIssue = 0;
+        yearOfIssue = "0";
         screenSizeInches = "0";
-        price = 0;
+        price = "0";
         ID = idCounter;
         idCounter++;
     }
 
-    Phone(string myphoneName, string mymodelName, string myformFactor, int myyearOfIssue, string myscreenSizeInches, float myprice)
+    Phone(string myphoneName, string mymodelName, string myformFactor, string myyearOfIssue, string myscreenSizeInches, string myprice)
     {
         phoneName = myphoneName;
         modelName = mymodelName;
@@ -56,7 +56,7 @@ public:
     {
         return formFactor;
     }
-    int GetYearOfIssue() {
+    string GetYearOfIssue() {
         return yearOfIssue;
     }
 
@@ -64,7 +64,7 @@ public:
         return screenSizeInches;
     }
 
-    float GetPrice() {
+    string GetPrice() {
         return price;
     }
 
@@ -72,9 +72,9 @@ public:
     string phoneName;
     string modelName;
     string formFactor;
-    int yearOfIssue;
+    string yearOfIssue;
     string screenSizeInches;
-    float price;
+    string price;
 };
 
 bool operator== (const Phone& p1, const Phone& p2)

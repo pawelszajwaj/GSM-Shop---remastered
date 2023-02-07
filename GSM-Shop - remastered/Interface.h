@@ -27,7 +27,9 @@ public:
             cout << "Add a phone? Press 1\n";
             cout << "Delete a phone ? Press 2\n";
             cout << "Get a report? Press 3\n";
-            cout << "I do not like your store. Press 4\n";
+            cout << "Get a copy of our data for yourself? Press 4\n";
+            cout << "Update our data? Press 5\n";
+            cout << "I do not like your store. Press 6\n";
 
             cin >> choice;
             system("CLS");
@@ -49,8 +51,22 @@ public:
                 cin >> skip;
 
                 break;
-            case 4:
+            case 6:
                 isInShop = false;
+                break;
+            case 4:
+                cout << "How will u call this file? (example: data.txt)";
+                cin >> skip;
+                myPhoneShop.WriteToFile(skip);
+                cout << "Here you go, champ.\n(Press 1 to continue)";
+                cin >> skip;
+                break;
+            case 5:
+                cout << "How is this file called? (example: data.txt)";
+                cin >> skip;
+                myPhoneShop.ReadFromFile(skip);
+                cout << "Thanks, champ.\n(Press 1 to continue)";
+                cin >> skip;
                 break;
             }
         }
