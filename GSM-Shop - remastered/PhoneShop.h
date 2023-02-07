@@ -248,6 +248,13 @@ public:
             iter->second += 1;
     }
 
+    void RemoveFromSizePopularity(string phonesize)
+    {
+        auto iterBrands = Brands.find(phonesize);
+        if (iterBrands != Brands.end())
+            iterBrands->second -= 1;
+    }
+
     void RemoveFromBrands(string phonename) {
         auto iterBrands = Brands.find(phonename);
         if (iterBrands != Brands.end())
